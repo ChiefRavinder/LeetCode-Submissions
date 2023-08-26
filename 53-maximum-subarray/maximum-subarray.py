@@ -4,13 +4,15 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
+        maxSum=nums[0]
+        currSum=nums[0]
+
+        for i in nums[1::]:
+            currSum=max(i,currSum+i)
+            maxSum=max(maxSum,currSum)
+
+        return maxSum
         
-        max_ending_here = max_so_far = nums[0]
         
-        for num in nums[1:]:
-            max_ending_here = max(num, max_ending_here + num)
-            max_so_far = max(max_so_far, max_ending_here)
-            
-        return max_so_far
         
 
