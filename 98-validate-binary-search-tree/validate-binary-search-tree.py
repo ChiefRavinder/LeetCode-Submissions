@@ -14,7 +14,7 @@
 
 #         def dfs(node,minn,maxx):
 #             if not node:
-#                 return 
+#                 return True
 #             pivot=node.val
 #             if node.left:
 #                 if node.left.val>=minn and node.left.val>=pivot:
@@ -33,32 +33,48 @@
 
 #             return True
 
-        # return dfs(root,(float('inf')),(float('-inf')))
+#         return dfs(root,(float('inf')),(float('-inf')))
 
+# class Solution(object):
+#     def isValidBST(self, root):
+#         """
+#         :type root: TreeNode
+#         :rtype: bool
+#         """
+        
+#         # Helper function to check if a binary tree is a valid BST
+#         def is_valid_bst(node, min_val, max_val):
+#             if not node:
+#                 return True
+            
+#             # Check if the current node's value is within the valid range
+#             if min_val is not None and node.val <= min_val:
+#                 return False
+#             if max_val is not None and node.val >= max_val:
+#                 return False
+            
+#             # Recursively check the left and right subtrees with updated range
+#             return (is_valid_bst(node.left, min_val, node.val) and
+#                     is_valid_bst(node.right, node.val, max_val))
+        
+#         # Start the validation with an initial range of None for both min and max values
+#         return is_valid_bst(root, None, None)
+
+        
 class Solution(object):
     def isValidBST(self, root):
         """
         :type root: TreeNode
         :rtype: bool
         """
-        
-        # Helper function to check if a binary tree is a valid BST
-        def is_valid_bst(node, min_val, max_val):
+        def dfs(node, minn, maxx):
             if not node:
                 return True
-            
-            # Check if the current node's value is within the valid range
-            if min_val is not None and node.val <= min_val:
-                return False
-            if max_val is not None and node.val >= max_val:
-                return False
-            
-            # Recursively check the left and right subtrees with updated range
-            return (is_valid_bst(node.left, min_val, node.val) and
-                    is_valid_bst(node.right, node.val, max_val))
-        
-        # Start the validation with an initial range of None for both min and max values
-        return is_valid_bst(root, None, None)
 
-        
-        
+            if node.val <= minn or node.val >= maxx:
+                return False
+
+            # Recursively check left and right subtrees
+            return (dfs(node.left, minn, node.val) and dfs(node.right, node.val, maxx))
+
+        return dfs(root, float('-inf'), float('inf'))
