@@ -12,16 +12,16 @@ class Solution(object):
         :rtype: int
         """
 
-        arr=[]
+        stack=[]
+        while True:
+            while root:
+                stack.append(root)
+                root=root.left
+            root=stack.pop()
+            k-=1
 
-        def dfs(node):
-            if not node:
-                return None
-            arr.append(node.val)
-            dfs(node.left)
-            dfs(node.right)
+            if k==0:
+                return root.val
 
-        dfs(root)
-        arr.sort()
-        return arr[k-1]
+            root=root.right
         
