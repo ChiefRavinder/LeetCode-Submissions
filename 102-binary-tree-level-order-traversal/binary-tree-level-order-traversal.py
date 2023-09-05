@@ -19,23 +19,21 @@ class Solution(object):
             return []
         q=[root]
         nextQ=[]
-        res=[]
         level=[]
+        res=[]
         while q:
-            
             for root in q:
-                if root:
-                    level.append(root.val)
-                    if root.left:
-                        nextQ.append(root.left)
-                    if root.right:
-                        nextQ.append(root.right)
+                level.append(root.val)
+                if root.left:
+                    nextQ.append(root.left)
+                if root.right:
+                    nextQ.append(root.right)
             res.append(level)
             q=nextQ
-            level=[]
             nextQ=[]
+            level=[]
+        
         return res
-
 
 
 
