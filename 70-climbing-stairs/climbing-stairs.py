@@ -1,17 +1,14 @@
-class Solution(object):
-    def climbStairs(self, n):
-        """
-        :type n: int
-        :rtype: int
-        """
-        one=1
-        two=1
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        ways = 1
 
-        for i in range (n-1):
-            temp=one
-            one+=two
-            two=temp
+        for i in range(1, (n // 2) + 1):
+            product = 1
 
-        return one
-            
-        
+            for j in range(i, 2 * i):
+                product *= (n - j) / (j - i + 1)
+
+            ways += product
+
+        return int(ways)
+
